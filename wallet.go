@@ -9,6 +9,7 @@ import (
 	"github.com/shopspring/decimal"
 	"golang.org/x/xerrors"
 
+	_ "github.com/myxtype/filecoin-client/sigs/bls"  // enable bls signatures
 	_ "github.com/myxtype/filecoin-client/sigs/secp" // enable secp signatures
 )
 

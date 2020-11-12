@@ -2,6 +2,7 @@ package filecoin
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/hex"
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/specs-actors/actors/crypto"
@@ -76,10 +77,11 @@ func TestClient_WalletSignMessageLocal(t *testing.T) {
 		Method:     0,
 		Params:     nil,
 	}
+	prikey, _ := base64.StdEncoding.DecodeString("gVunJT9u8yYZUDl/ooN70nTAMCcb6OM+wd5rix0PT2o=")
 
-	prikey, _ := hex.DecodeString("98dde0a7448462d93afe8282c8813421d499f7a9361426bb1d91794b1970b354")
+	//prikey, _ := hex.DecodeString("57766c58667669516859744963642b6c4c4c53364a504b414344576646716354396b644565597468556a593d")
 
-	sm, err := c.WalletSignMessageLocal(crypto.SigTypeSecp256k1, prikey, msg)
+	sm, err := c.WalletSignMessageLocal(crypto.SigTypeBLS, prikey, msg)
 	if err != nil {
 		t.Error(err)
 	}
