@@ -81,7 +81,7 @@ func TestClient_WalletSignMessageLocal(t *testing.T) {
 
 	//prikey, _ := hex.DecodeString("57766c58667669516859744963642b6c4c4c53364a504b414344576646716354396b644565597468556a593d")
 
-	sm, err := c.WalletSignMessageLocal(crypto.SigTypeBLS, prikey, msg)
+	sm, err := c.WalletSignMessageLocal(KTBLS, prikey, msg)
 	if err != nil {
 		t.Error(err)
 	}

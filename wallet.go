@@ -13,6 +13,11 @@ import (
 	_ "github.com/myxtype/filecoin-client/sigs/secp" // enable secp signatures
 )
 
+const (
+	KTSecp256k1 = "secp256k1"
+	KTBLS       = "bls"
+)
+
 // WalletBalance returns the balance of the given address at the current head of the chain.
 func (c *Client) WalletBalance(ctx context.Context, addr address.Address) (decimal.Decimal, error) {
 	var balance decimal.Decimal
@@ -84,9 +89,18 @@ func (c *Client) WalletVerify(ctx context.Context, k string, msg []byte, sig *cr
 }
 
 // WalletSignMessage signs the given message with the given private key
-func (c *Client) WalletSignMessageLocal(sigType crypto.SigType, privkey []byte, message *types.Message) (*types.SignedMessage, error) {
+func (c *Client) WalletSignMessageLocal(sigT string, privkey []byte, message *types.Message) (*types.SignedMessage, error) {
 	mcid := message.Cid()
 
+	var sigType crypto.SigType
+
+	if sigT == KTSecp256k1 {
+		sigType = crypto.SigTypeSecp256k1
+	} else if sigT == KTBLS {
+		sigType = crypto.SigTypeBLS
+	} else {
+		return nil, xerrors.Errorf("unsupport sign type")
+	}
 	sig, err := sigs.Sign(sigType, privkey, mcid.Bytes())
 	if err != nil {
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
