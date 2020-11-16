@@ -2,7 +2,7 @@ package types
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/shopspring/decimal"
+	"github.com/filecoin-project/go-state-types/abi"
 )
 
 type Message struct {
@@ -10,10 +10,10 @@ type Message struct {
 	To         address.Address `json:"To"`
 	From       address.Address `json:"From"`
 	Nonce      uint64          `json:"Nonce"`
-	Value      decimal.Decimal `json:"Value"`
+	Value      abi.TokenAmount `json:"Value"`
 	GasLimit   int64           `json:"GasLimit"`
-	GasFeeCap  decimal.Decimal `json:"GasFeeCap"`
-	GasPremium decimal.Decimal `json:"GasPremium"`
+	GasFeeCap  abi.TokenAmount `json:"GasFeeCap"`
+	GasPremium abi.TokenAmount `json:"GasPremium"`
 	Method     uint64          `json:"Method"`
 	Params     []byte          `json:"Params"`
 }

@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/actors/crypto"
 	"github.com/myxtype/filecoin-client/types"
-	"github.com/shopspring/decimal"
 	"testing"
 )
 
@@ -70,10 +70,10 @@ func TestClient_WalletSignMessageLocal(t *testing.T) {
 		To:         to,
 		From:       from,
 		Nonce:      0,
-		Value:      decimal.NewFromInt(10000000),
+		Value:      abi.NewTokenAmount(10000000),
 		GasLimit:   0,
-		GasFeeCap:  decimal.Decimal{},
-		GasPremium: decimal.Decimal{},
+		GasFeeCap:  abi.NewTokenAmount(0),
+		GasPremium: abi.NewTokenAmount(0),
 		Method:     0,
 		Params:     nil,
 	}

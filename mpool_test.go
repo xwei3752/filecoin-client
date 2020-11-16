@@ -3,6 +3,7 @@ package filecoin
 import (
 	"context"
 	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/myxtype/filecoin-client/types"
 	"github.com/shopspring/decimal"
 	"testing"
@@ -20,10 +21,10 @@ func TestClient_MpoolPush(t *testing.T) {
 		To:         to,
 		From:       from,
 		Nonce:      0,
-		Value:      FromFil(decimal.NewFromFloat(1)),
+		Value:      FromFilToTokenAmount(decimal.NewFromFloat(1)),
 		GasLimit:   0,
-		GasFeeCap:  decimal.Zero,
-		GasPremium: decimal.Zero,
+		GasFeeCap:  abi.NewTokenAmount(0),
+		GasPremium: abi.NewTokenAmount(0),
 		Method:     0,
 		Params:     nil,
 	}

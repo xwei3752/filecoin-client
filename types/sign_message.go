@@ -78,8 +78,7 @@ func (t *Message) MarshalCBOR(w io.Writer) error {
 	}
 
 	// t.Value (big.Int) (struct)
-	value := abi.NewTokenAmount(t.Value.IntPart())
-	if err := value.MarshalCBOR(w); err != nil {
+	if err := t.Value.MarshalCBOR(w); err != nil {
 		return err
 	}
 
@@ -95,14 +94,12 @@ func (t *Message) MarshalCBOR(w io.Writer) error {
 	}
 
 	// t.GasFeeCap (big.Int) (struct)
-	gasFeeCap := abi.NewTokenAmount(t.GasFeeCap.IntPart())
-	if err := gasFeeCap.MarshalCBOR(w); err != nil {
+	if err := t.GasFeeCap.MarshalCBOR(w); err != nil {
 		return err
 	}
 
 	// t.GasPremium (big.Int) (struct)
-	gasPremium := abi.NewTokenAmount(t.GasPremium.IntPart())
-	if err := gasPremium.MarshalCBOR(w); err != nil {
+	if err := t.GasPremium.MarshalCBOR(w); err != nil {
 		return err
 	}
 

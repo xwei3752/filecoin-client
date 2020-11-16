@@ -1,6 +1,9 @@
 package filecoin
 
-import "github.com/shopspring/decimal"
+import (
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/shopspring/decimal"
+)
 
 // 将大数的Fil转换为小数
 func ToFil(v decimal.Decimal) decimal.Decimal {
@@ -10,4 +13,8 @@ func ToFil(v decimal.Decimal) decimal.Decimal {
 // 将小数的Fil转换为大数
 func FromFil(v decimal.Decimal) decimal.Decimal {
 	return v.Mul(decimal.NewFromInt(10).Pow(decimal.NewFromInt(18))).Truncate(0)
+}
+
+func FromFilToTokenAmount(v decimal.Decimal) abi.TokenAmount {
+	return abi.NewTokenAmount(v.Mul(decimal.NewFromInt(10).Pow(decimal.NewFromInt(18))).Truncate(0).IntPart())
 }
