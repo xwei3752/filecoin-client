@@ -2,6 +2,7 @@ package filecoin
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/shopspring/decimal"
 )
 
@@ -16,5 +17,5 @@ func FromFil(v decimal.Decimal) decimal.Decimal {
 }
 
 func FromFilToTokenAmount(v decimal.Decimal) abi.TokenAmount {
-	return abi.NewTokenAmount(v.Mul(decimal.NewFromInt(10).Pow(decimal.NewFromInt(18))).Truncate(0).IntPart())
+	return big.NewFromGo(v.Mul(decimal.NewFromInt(10).Pow(decimal.NewFromInt(18))).BigInt())
 }
